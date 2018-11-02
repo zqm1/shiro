@@ -20,17 +20,21 @@ import org.apache.shiro.realm.Realm;
 public class MyRealm1 implements Realm {
 
 	public String getName() {
+		System.out.println("看下作用  getname()");
 		return "myrealm1";
 	}
 
 	public boolean supports(AuthenticationToken token) {
+		System.out.println("看下作用  supports() ");
 		return token instanceof UsernamePasswordToken; // 仅支持UsernamePasswordToken类型的Token
 	}
 
 	public AuthenticationInfo getAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
 		String username = (String) token.getPrincipal(); // 得到用户名
+		System.out.println("用户名是" + username);
 		String password = new String((char[]) token.getCredentials()); // 得到密码
+		System.out.println("密码是" + password);
 		if (!"zhang".equals(username)) {
 			throw new UnknownAccountException(); // 如果用户名错误
 		}
